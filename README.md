@@ -60,4 +60,4 @@ Adding the `--impersonate` argument to the basic usage of the script allows you 
 * Source content that contains images, embeds, and attachments cannot be imported via API. Images can be imported by copy-paste after the bulk import is completed. Embeds and attachments can likewise be added post-import by either copying their contents or hyperlinking to the external file. 
 * Question imports are currently designed to support importing a corresponding answer. This is on the backlog for improvement.
 
-If you encounter problems using the script, please open a support issue with Stack Overflow. You can also clone and change the script to suit your needs. It is provided as-is, with no warranty or guarantee of any kind.
+If you encounter problems using the script, please leave feedback in the Github Issues. You can also clone and change the script to suit your needs. It is provided as-is, with no warranty or guarantee of any kind.
