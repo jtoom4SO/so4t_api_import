@@ -220,6 +220,11 @@ class V2Client(object):
             self.api_key = None
             self.token = args.token
             self.impersonation_token = None
+            # Add User-Agent header
+            self.headers = {
+                'X-API-Access-Token': self.token,
+                'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
+            }
         else:
             self.soe = True # Stack Overflow Enterprise
             self.api_url = args.url + "/api/2.3"
@@ -227,7 +232,12 @@ class V2Client(object):
             self.api_key = args.key
             self.token = args.token
             self.impersonation_token = None
-
+            # Add User-Agent header
+            self.headers = {
+                'X-API-Key': self.api_key,
+                'X-API-Access-Token': self.token,
+                'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
+            }
 
         self.ssl_verify = self.test_connection()
 
@@ -239,13 +249,17 @@ class V2Client(object):
         
         params = {}
         if self.soe: # Stack Overflow Enterprise
+            # Add User-Agent header
             headers = {
                 'X-API-Key': self.api_key,
-                'X-API-Access-Token': self.token
+                'X-API-Access-Token': self.token,
+                'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
             }
         else: # Stack Overflow for Teams
+            # Add User-Agent header
             headers = {
-                'X-API-Access-Token': self.token
+                'X-API-Access-Token': self.token,
+                'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
             }
             params['team'] = self.team_slug
 
@@ -381,6 +395,11 @@ class V3Client(object):
             self.soe = True
             self.api_url = args.url + "/api/v3"
 
+        # Add User-Agent header
+        self.headers = {
+            'Authorization': f'Bearer {self.token}',
+            'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
+        }
         self.ssl_verify = self.test_connection()
 
     
@@ -388,7 +407,11 @@ class V3Client(object):
 
         endpoint = "/tags"
         endpoint_url = self.api_url + endpoint
-        headers = {'Authorization': f'Bearer {self.token}'}
+        # Add User-Agent header
+        headers = {
+            'Authorization': f'Bearer {self.token}',
+            'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
+        }
         ssl_verify = True
 
         print("Testing API v3 connection...")
@@ -444,9 +467,17 @@ class V3Client(object):
         endpoint_url = self.api_url + endpoint
 
         if self.impersonation_token: # If an impersonation token is provided, use it
-            headers = {'Authorization': f'Bearer {self.impersonation_token}'}
+            # Add User-Agent header
+            headers = {
+                'Authorization': f'Bearer {self.impersonation_token}',
+                'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
+            }
         else:
-            headers = {'Authorization': f'Bearer {self.token}'}
+            # Add User-Agent header
+            headers = {
+                'Authorization': f'Bearer {self.token}',
+                'User-Agent': 'so4t_api_import/1.0 (http://your-app-url.com; your-contact@email.com)'
+            }
 
         data = []
         while True:
